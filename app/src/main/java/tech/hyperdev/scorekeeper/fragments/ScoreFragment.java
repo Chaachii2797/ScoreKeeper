@@ -41,7 +41,10 @@ public class ScoreFragment extends Fragment{
 
         final TextView tvScore = (TextView) view.findViewById(R.id.textScore);
         score = Integer.parseInt(tvScore.getText().toString());
-        tvScore.setText("");
+        if(savedInstanceState!=null){
+            score = savedInstanceState.getInt("Score",score);
+            tvScore.setText(""+score);
+        }
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +83,13 @@ public class ScoreFragment extends Fragment{
             name = bundle.getString("name");
         }
     }
-//
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("Score",score);
+    }
+    //
 //    @Override
 //    public void onClick(View v) {
 //        if(v==btnAdd){

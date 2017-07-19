@@ -25,19 +25,21 @@ public class MainActivity extends AppCompatActivity {
 //        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 //        ft.add(R.id.activity_main,fragment);
 //        ft.commit();
-        firstFrame = (FrameLayout) findViewById(R.id.FirstFrame);
-        secondFrame = (FrameLayout) findViewById(R.id.SecondFrame);
+        if(savedInstanceState == null) {
+            firstFrame = (FrameLayout) findViewById(R.id.FirstFrame);
+            secondFrame = (FrameLayout) findViewById(R.id.SecondFrame);
 
-        Fragment first = ScoreFragment.newInstance("Team 1");
-        Fragment second = ScoreFragment.newInstance("Team 2");
+            Fragment first = ScoreFragment.newInstance("Team 1");
+            Fragment second = ScoreFragment.newInstance("Team 2");
 
-        FragmentTransaction one = getSupportFragmentManager().beginTransaction();
-        getSupportFragmentManager().beginTransaction();
-        one.add(R.id.FirstFrame, first).commit();
+            FragmentTransaction one = getSupportFragmentManager().beginTransaction();
+            getSupportFragmentManager().beginTransaction();
+            one.replace(R.id.FirstFrame, first).commit();
 
-        FragmentTransaction two = getSupportFragmentManager().beginTransaction();
-        getSupportFragmentManager().beginTransaction();
-        two.add(R.id.SecondFrame,second).commit();
+            FragmentTransaction two = getSupportFragmentManager().beginTransaction();
+            getSupportFragmentManager().beginTransaction();
+            two.replace(R.id.SecondFrame, second).commit();
+        }
 
     }
 }

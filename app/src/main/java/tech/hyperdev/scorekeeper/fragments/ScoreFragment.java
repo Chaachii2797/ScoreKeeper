@@ -45,14 +45,20 @@ public class ScoreFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 score++;
-                if(score<0){score=0;tvScore.setText(""+score);}
+                if(score<0){
+                    score=0;
+                    tvScore.setText(""+score);
+                }
             }
         });
         btnSub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 score--;
-                if(score<0){score=0;tvScore.setText(""+score);}
+                if(score<0){
+                    score=0;
+                    tvScore.setText(""+score);
+                }
             }
         });
 
@@ -71,7 +77,6 @@ public class ScoreFragment extends Fragment{
     private void readBundle(Bundle bundle) {
         if (bundle != null) {
             name = bundle.getString("name");
-
         }
     }
 

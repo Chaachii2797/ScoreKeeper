@@ -32,10 +32,12 @@ public class MainActivity extends AppCompatActivity {
         Fragment second = ScoreFragment.newInstance("Team 2");
 
         FragmentTransaction one = getSupportFragmentManager().beginTransaction();
+        getSupportFragmentManager().beginTransaction();
         one.add(R.id.FirstFrame, first).commit();
 
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.SecondFrame, second).commit();
+        FragmentTransaction two = getSupportFragmentManager().beginTransaction();
+        getSupportFragmentManager().beginTransaction();
+        two.add(R.id.SecondFrame,second).commit();
 
     }
 }

@@ -41,6 +41,7 @@
             android:layout_toLeftOf="@+id/tvTeamName"
             android:layout_toStartOf="@+id/tvTeamName"
             android:contentDescription="Plus Button"
+            android:onClick="true"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTeamName"
             app:srcCompat="@drawable/ic_plus" />
@@ -52,6 +53,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="23dp"
             android:layout_marginStart="23dp"
+            android:onClick="true"
             android:layout_toEndOf="@+id/tvTeamName"
             android:layout_toRightOf="@+id/tvTeamName"
             android:contentDescription="Minus Button"

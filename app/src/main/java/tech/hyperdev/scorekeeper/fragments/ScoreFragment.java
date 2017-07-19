@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import tech.hyperdev.scorekeeper.R;
 
@@ -24,7 +25,6 @@ public class ScoreFragment extends Fragment{
     Spinner spinner;
     String name;
     int score;
-    int scorer=1;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -32,11 +32,13 @@ public class ScoreFragment extends Fragment{
 //        setRetainInstance(true);
         View view = inflater.inflate(R.layout.fragment_score, container, false);
         readBundle(getArguments());
+
         TextView teamName = (TextView) view.findViewById(R.id.tvTeamName);
         teamName.setText(name+"");
 
         btnAdd = (ImageButton) view.findViewById(R.id.btnPlus);
         btnSub = (ImageButton) view.findViewById(R.id.btnMinus);
+
         final TextView tvScore = (TextView) view.findViewById(R.id.textScore);
         score = Integer.parseInt(tvScore.getText().toString());
         tvScore.setText("");
@@ -44,23 +46,22 @@ public class ScoreFragment extends Fragment{
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                score++;
-                if(score<0){
-                    score=0;
-                    tvScore.setText(""+score);
-                }
+                Toast.makeText(getActivity(),"Add"+score,Toast.LENGTH_SHORT).show();
+                ++score;
+                tvScore.setText(" "+score);
             }
         });
         btnSub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                score--;
-                if(score<0){
-                    score=0;
-                    tvScore.setText(""+score);
-                }
+                Toast.makeText(getActivity(),"Minus"+score,Toast.LENGTH_SHORT).show();
+                --score;
+                tvScore.setText(" "+score);
+
             }
         });
+//        btnSub.setOnClickListener(this);
+//        btnAdd.setOnClickListener(this);
 
         return view;
     }
@@ -79,19 +80,22 @@ public class ScoreFragment extends Fragment{
             name = bundle.getString("name");
         }
     }
-
+//
 //    @Override
 //    public void onClick(View v) {
-//        if(v == btnAdd){
-//            String increment = tvScore.getText().toString();
-//            int incrementValue = Integer.parseInt(increment);
-//            incrementValue++;
-//            tvScore.setText(String.valueOf(incrementValue));
-//        }else if(v==btnSub){
-//            String decrement = tvScore.getText().toString();
-//            int decrementValue = Integer.parseInt(decrement);
-//            decrementValue--;
-//            tvScore.setText(String.valueOf(decrementValue));
+//        if(v==btnAdd){
+//            score++;
+//                if(score<0){
+//                    score=0;
+//                    tvScore.setText(""+score);
+//            }
 //        }
+//    }
+//    else if(v==btnMinus){
+//        score--;
+//            if(score<0) {
+//                score = 0;
+//                tvScore.setText("" + score);
+//            }
 //    }
 }

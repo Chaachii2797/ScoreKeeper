@@ -5,23 +5,88 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import tech.hyperdev.scorekeeper.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ScoreFragment extends Fragment {
+public class ScoreFragment extends Fragment{
 
     public ScoreFragment() {
         // Required empty public constructor
     }
-
+    ImageButton btnAdd, btnSub;
+    Spinner spinner;
+    String name;
+    int score;
+    int scorer=1;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_score, container, false);
+//        setRetainInstance(true);
+        View view = inflater.inflate(R.layout.fragment_score, container, false);
+        readBundle(getArguments());
+        TextView teamName = (TextView) view.findViewById(R.id.tvTeamName);
+        teamName.setText(name+"");
+
+        btnAdd = (ImageButton) view.findViewById(R.id.btnPlus);
+        btnSub = (ImageButton) view.findViewById(R.id.btnMinus);
+        final TextView tvScore = (TextView) view.findViewById(R.id.textScore);
+        score = Integer.parseInt(tvScore.getText().toString());
+        tvScore.setText("");
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                score++;
+                if(score<0){score=0;tvScore.setText(""+score);}
+            }
+        });
+        btnSub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                score--;
+                if(score<0){score=0;tvScore.setText(""+score);}
+            }
+        });
+
+        return view;
     }
 
+    public static ScoreFragment newInstance(String name){
+        Bundle bundle = new Bundle();
+        bundle.putString("name",name);
+
+        ScoreFragment fragment = new ScoreFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    private void readBundle(Bundle bundle) {
+        if (bundle != null) {
+            name = bundle.getString("name");
+
+        }
+    }
+
+//    @Override
+//    public void onClick(View v) {
+//        if(v == btnAdd){
+//            String increment = tvScore.getText().toString();
+//            int incrementValue = Integer.parseInt(increment);
+//            incrementValue++;
+//            tvScore.setText(String.valueOf(incrementValue));
+//        }else if(v==btnSub){
+//            String decrement = tvScore.getText().toString();
+//            int decrementValue = Integer.parseInt(decrement);
+//            decrementValue--;
+//            tvScore.setText(String.valueOf(decrementValue));
+//        }
+//    }
 }
